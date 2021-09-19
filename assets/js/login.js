@@ -1,6 +1,5 @@
 $(function () {
-  // 设置baseURL
-  let baseUrl = 'http://api-breakingnews-web.itheima.net';
+  
   // 点击去登录链接时隐藏注册反之则隐藏登录
   $('#linkReg').on('click', function () {
     $('.loginBox').hide();
@@ -43,7 +42,7 @@ $(function () {
     // 发送请求
     $.ajax({
       method: 'POST',
-      url: baseUrl+'/api/reguser',
+      url: '/api/reguser',
       data,
       success(res) {
         console.log(res);
@@ -66,7 +65,7 @@ $(function () {
     // 发送请求
     $.ajax({
       method: 'POST',
-      url: baseUrl+'/api/login',
+      url: '/api/login',
       data,
       success(res) {
         console.log(res);
@@ -74,6 +73,8 @@ $(function () {
           return layer.msg(res.message, { icon: 5 });
         }
         layer.msg(res.message, { icon: 6 })
+        // 跳转到主页
+        location.href='../../index.html'
       }
     })
   })
