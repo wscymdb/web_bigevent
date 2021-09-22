@@ -73,8 +73,16 @@ $(function () {
           return layer.msg(res.message, { icon: 5 });
         }
         layer.msg(res.message, { icon: 6 })
+<<<<<<< HEAD
         // 跳转到主页
         location.href='../../index.html'
+=======
+        // 将token值暂时存入浏览器中
+        localStorage.setItem('token',res.token)
+        // 跳转到后台首页
+        location.replace('../../index.html') 
+        //
+>>>>>>> index
       }
     })
   })
