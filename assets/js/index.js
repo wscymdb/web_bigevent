@@ -5,12 +5,13 @@ $(function () {
   $('#btnLogout').on('click', () => {
     layer.confirm('确定退出登录?', { icon: 3, title: '温馨提醒' }, function (index) {
       //清空token，跳转到登录
-      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
       location.replace('/login.html');
       // 关闭弹出层  自带的
       layer.close(index);
     });
   })
+  
 })
 
 // 获取用户基本信息
@@ -20,7 +21,7 @@ function getUserInfo() {
     url: '/my/userinfo',
     // 请求头配置对象
     // headers: {
-    //   Authorization: localStorage.getItem('token') || ''
+    //   Authorization: sessionStorage.getItem('token') || ''
     // },
     success(res) {
       // console.log(res);
@@ -35,6 +36,7 @@ function getUserInfo() {
 }
 // 渲染用户头像
 function renderAvatar(user) {
+  // console.log(user);
   let uname = user.nickname || user.username;
   // 替换用户的名称 有昵称优先替换没有则替换登录名
   $('#welcome').html('你好&nbsp;' + uname)
@@ -42,7 +44,7 @@ function renderAvatar(user) {
   if (user.user_pic) {
     // 如果有头像图片
     $('.text-avatar').hide();
-    $('.layui-nav-img').attr('src', user_pic);
+    $('.layui-nav-img').attr('src', user.user_pic);
     return
   }
   // 没有头像,截取用户名的首字符作为头像
