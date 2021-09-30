@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
+  <link rel="stylesheet" href="../assets/css/article/art_cate.css">
+</head>
+
+<body>
+  <!-- 面板 -->
+  <div class="layui-card">
+    <div class="layui-card-header">
+      <span>文章类别管理</span>
+      <button id="addBtn" type="button" class="layui-btn layui-btn-normal layui-btn-sm">添加类别</button>
+    </div>
+    <div class="layui-card-body">
+      <!-- 表格区域 -->
+      <table class="layui-table">
+        <colgroup>
+          <col>
+          <col>
+          <col width="200">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>分类名称</th>
+            <th>分类类别</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </div>
+  </div>
+  <!-- 添加文章的结构 -->
+  <script type="text/html" id="dialog_add">
+    <form class="layui-form" action="" id="add_art">
+      <div class="layui-form-item">
+        <label class="layui-form-label">分类名称</label>
+        <div class="layui-input-block">
+          <input type="text" name="aname" required  lay-verify="required" placeholder="请输入标题"  class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">分类标题</label>
+        <div class="layui-input-block">
+          <input type="text" name="alias" required  lay-verify="required" placeholder="请输入标题"  class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="formDemo">确认添加</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+    </form>
+  </script>
+
+
+  <!-- 修改文章结构 -->
+  <script type="text/html" id="dialod_edit">
+    <form class="layui-form" action="" id="edit_art">
+      <div class="layui-form-item">
+        <label class="layui-form-label">分类名称</label>
+        <div class="layui-input-block">
+          <input type="text" name="ename" required  lay-verify="required" placeholder="请输入标题"  class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">分类标题</label>
+        <div class="layui-input-block">
+          <input type="text" name="ealias" required  lay-verify="required" placeholder="请输入标题"  class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+          <button type="reset" class="layui-btn layui-btn-primary">清空</button>
+        </div>
+      </div>
+      <!-- 隐藏域获取ID -->
+      <input type="hidden" name="hideID">
+    </form>
+  </script>
+
+
+  <!-- 表格数据的模板 -->
+  <script type="text/html" id="tpl_art">
+    {{each }}
+    <tr>
+      <td>{{$value.name}}</td>
+      <td>{{$value.alias}}</td>
+      <td>
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="eduit_art" data-id="{{$value.Id}}">编辑</button>
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" id="remove_art"  data-id="{{$value.Id}}">删除</button>
+      </td>
+    </tr>
+    {{/each}}
+  </script>
+  <script src="../assets/lib/layui/layui.js"></script>
+  <script src="../assets/lib/jquery.js"></script>
+  <script src="../assets/js/baseURL.js"></script>
+  <script src="../assets/lib/template-web.js"></script>
+  <script src="../assets/js/article/art_cate.js"></script>
+</body>
+
+</html>
