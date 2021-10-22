@@ -6,7 +6,7 @@ $(function () {
   // 定义获取文章详情的方法
   function initInfo() {
     let editId = sessionStorage.getItem('editId')
-    console.log(editId);
+    // console.log(editId);
     // 发起Ajax请求
     $.ajax({
       method: 'GET',
@@ -16,9 +16,10 @@ $(function () {
         if (res.status !== 0) return layer.msg(res.message);
         $('[name=title]').val(res.data.title);
         $('[name=content]').val(res.data.content);
-        // $('[name=cate_id]').val(res.data.cate_id);
+        $('[name=cate_id]').attr('id',res.data.cate_id);
+        $('#image').attr('src',res.data.cover_img);
         // 重新渲染一下整个页面
-        // form.render();
+        form.render();
       }
     })
   }
@@ -33,7 +34,8 @@ $(function () {
         if (res.status !== 0) return layer.msg(res.message);
         // 使用模板引擎渲染分类的下拉菜单
         let htmlStr = template('tpl-cate', res);
-        $('[name=cate_id]').html(htmlStr)
+        $('[name=cate_id]').html(htmlStr);
+        
         // 重新渲染一下整个页面
         form.render();
       }
@@ -65,7 +67,7 @@ $(function () {
 
   // 监听coverFile的change事件 获取用户的选择文件列表
   $('#coverFile').on('change', function (e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     let files = e.target.files;
     let file = e.target.files[0]
     if (files.length === 0) return layer.msg('请选择图片')
@@ -94,7 +96,7 @@ $(function () {
     // 2. 像formData追加
     fd.append('state', art_state)
     // 追加文章Id
-    fd.append('Id',sessionStorage.getItem('editId'))
+    fd.append('id',sessionStorage.getItem('editId'))
 
     // 3. 将裁剪后的图片输出为一个文件
     $image
@@ -114,7 +116,7 @@ $(function () {
       })
   })
 
-  // 定义一个发布文章的方法
+  // 定义一个修改文章的方法
   function publishArticle(fd) {
     $.ajax({
       method: 'POST',

@@ -2,7 +2,8 @@
 // 会先调用ajaxPrefilter这个函数
 // 这个函数中可以拿到Ajax提供的配置对象
 $.ajaxPrefilter(function (options) {
-  options.url = 'http://api-breakingnews-web.itheima.net' + options.url
+  // options.url = 'http://api-breakingnews-web.itheima.net' + options.url
+  options.url = 'http://127.0.0.1:8080' + options.url
 
   // 为以‘/my’开头的api添加headers请求头
   if (/\/my/.test(options.url)) {

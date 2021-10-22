@@ -67,8 +67,7 @@
         <!-- 按钮 -->
         <div class="layui-form-item">
           <div class="layui-input-block">
-            <button class="layui-btn" lay-submit>发布</button>
-            <button id="btnSave2" class="layui-btn layui-btn-primary" lay-submit>存为草稿</button>
+            <button class="layui-btn" lay-submit>修改</button>
           </div>
         </div>
       </form>
@@ -78,7 +77,7 @@
   <script type="text/html" id="tpl-cate">
     <option value="">请选择文章类别</option>
     {{each data}}
-    <option value="{{$value.Id}}">{{$value.name}}</option>
+    <option value="{{$value.id}}">{{$value.name}}</option>
     {{/each}}
   </script>
   <script src="../assets/lib/layui/layui.js"></script>

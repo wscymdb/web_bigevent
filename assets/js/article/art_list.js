@@ -43,6 +43,7 @@ $(function () {
     // 根据最新的筛选条件重新调用获取列表函数
     initTable()
   })
+
   // 获取文章列表数据的方法
   function initTable() {
     $.ajax({
@@ -50,12 +51,11 @@ $(function () {
       url: '/my/article/list',
       data: q,
       success(res) {
-        // console.log(res);
         if (res.status !== 0) return layer.msg(res.message);
+        console.log(res);
         // 使用模板引擎渲染数据
         let htmlStr = template('tpl-table', res);
         $('#tbody').html(htmlStr)
-
         // 调用渲染分页的函数
         renderPage(res.total)
       }
@@ -109,11 +109,10 @@ $(function () {
 
   // 因为删除按钮是通过js动态添加的
   // 利用事件委托为删除按钮绑定单击事件
-  $('#tbody').on('click', '#removeList', (e) => {
+  // jq的on不等于js的addeventlistener 重复声明后者会替换前者
+  $('#tbody').delegate('#removeList', "click", (e) => {
     // 获取当前页面的删除按钮的个数
     let len = $('.btn-delete').length
-    console.log(len);
-
     // 询问删除
     layer.confirm('确认删除该信息?', { icon: 3, title: '提示' }, function (index) {
       //do something
@@ -123,8 +122,11 @@ $(function () {
         method: 'GET',
         url: '/my/article/delete/' + id,
         success(res) {
+          console.log(res);
           if (res.status !== 0) return layer.msg(res.message);
+          
           layer.msg(res.message);
+
           // 此时 如果当前数据删除完了 但是页码没变（有bug）
           // 当删除玩数据后判断当前这一页中是否还要其他数据
           // 如果没有 让页码-1
@@ -135,9 +137,9 @@ $(function () {
             // 注意  页码的数量最低是1
             q.pagenum = q.pagenum === 1 ? 1 : --q.pagenum;
           }
-
           // 重新渲染
           initTable()
+
         }
       })
       layer.close(index);
@@ -146,9 +148,9 @@ $(function () {
   })
 
   // 编辑按钮
-  $('#tbody').on('click', '#editList', function(e) {
+  $('#tbody').delegate('#editList', 'click', function (e) {
 
-    sessionStorage.setItem('editId',this.dataset.id)
+    sessionStorage.setItem('editId', this.dataset.id)
     location.href = '/article/atr_edit_pub.html';
   })
 })

@@ -36,7 +36,7 @@ $(function () {
   $('#tbody').on('click', '#remove_art', (e) => {
     layer.confirm('确定删除吗?', { icon: 3, title: '提示' }, function (index) {
       //do something
-      // console.log(e.target.dataset.id);
+      console.log(e.target.dataset.id);
       let id = e.target.dataset.id;
       $.ajax({
         method: 'GET',
@@ -72,7 +72,7 @@ $(function () {
         if (res.status !== 0) return layer.msg(res.message);
         $('[name=ename]').val(res.data.name)
         $('[name=ealias]').val(res.data.alias)
-        $('[name=hideID]').val(res.data.Id)
+        $('[name=hideID]').val(res.data.id)
       }
     })
   })
@@ -84,7 +84,7 @@ $(function () {
       method: 'POST',
       url: '/my/article/updatecate',
       data: {
-        Id: id,
+        id,
         name: $('[name=ename]').val(),
         alias: $('[name=ealias]').val()
       },
@@ -106,7 +106,7 @@ $(function () {
         // console.log(data);
         if (res.status !== 0) return layer.msg('获取文章列表失败');
         // 利用模板引擎渲染
-        $('#tbody').html(template('tpl_art', data))
+        $('#tbody').html(template('tpl_art', res))
       }
     })
   }

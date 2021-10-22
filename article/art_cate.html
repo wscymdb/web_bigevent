@@ -90,13 +90,13 @@
 
   <!-- 表格数据的模板 -->
   <script type="text/html" id="tpl_art">
-    {{each }}
+    {{each data}}
     <tr>
       <td>{{$value.name}}</td>
       <td>{{$value.alias}}</td>
       <td>
-        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="eduit_art" data-id="{{$value.Id}}">编辑</button>
-        <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" id="remove_art"  data-id="{{$value.Id}}">删除</button>
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" id="eduit_art" data-id="{{$value.id}}">编辑</button>
+        <button type="button" class="layui-btn layui-btn-sm layui-btn-danger" id="remove_art"  data-id="{{$value.id}}">删除</button>
       </td>
     </tr>
     {{/each}}
